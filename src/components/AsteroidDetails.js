@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal, selectIsOpenedModal } from "../features/modalSlice";
 import styled from "styled-components";
 import { selectCurrentAsteroid } from "../features/asteroidSlice";
+import CloseIcon from "@material-ui/icons/Close";
 
 Modal.setAppElement("#root");
 
@@ -43,6 +44,11 @@ const AsteroidDetails = () => {
     document.body.style.overflow = "unset";
   };
 
+  const handleCloseModal = () => {
+    dispatch(closeModal());
+    document.body.style.overflow = "unset";
+  };
+
   return (
     <Modal
       isOpen={isOpenedModal}
@@ -54,7 +60,7 @@ const AsteroidDetails = () => {
       {currentOpenedAsteroid && (
         <ModalContent>
           <AsteroidImage src="/assets/images/asteroids_card_bg.png" />
-          <CloseIcon src="/assets/images/times-solid.svg" />
+          <CloseIcon onClick={handleCloseModal} />
           <AsteroidMagnitude>
             {parseFloat(currentOpenedAsteroid.absolute_magnitude).toFixed(1)}
           </AsteroidMagnitude>
@@ -115,22 +121,21 @@ const ModalContent = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+
+  .MuiSvgIcon-root {
+    color: white;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    cursor: pointer;
+  }
 `;
 
 const AsteroidImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
-`;
-
-const CloseIcon = styled.img`
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  width: 30px;
-  height: 30px;
-  color: white;
-  fill: white;
 `;
 
 const AsteroidMagnitude = styled.div`
