@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import asteroidReducer from "../features/asteroidSlice";
+import modalReducer from "../features/modalSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    asteroid: asteroidReducer,
+    modal: modalReducer,
   },
 });
